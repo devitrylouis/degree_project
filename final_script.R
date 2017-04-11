@@ -9,14 +9,6 @@
 
 	source('~/Desktop/factoring.R')
 	source('~/Desktop/analysis.R')
-	source('~/Documents/Education/KTH/Bachelor thesis/R scripts/Regression/Multiple Regression/stepwise_selection.R')
-	source('~/Documents/Education/KTH/Bachelor thesis/R scripts/Regression/Multiple Regression/predict.regsubsets.R')
-	source('~/Desktop/expected_gain_tab.R')
-	source('~/Desktop/expected_gain.R')
-	source('~/Desktop/fitting.R')
-	source('~/Documents/Education/KTH/Bachelor thesis/R scripts/Regression/Multiple Regression/Suggestive Analysis.R')
-	source('~/Desktop/Suggestive Analysis.R')
-	source('~/Desktop/predict_feet.R')
 	
 # Importation of training and test set
 
@@ -27,17 +19,3 @@
 
 	model<-fitting(train)
 	summary(model)
-	analysis(df,model, residuals=TRUE, boxcox=TRUE, multicollinearity=TRUE,outliers=TRUE)
-	tabs<-compute_tabs(9,model,train)
-
-# Others models
-	
-	#stepwise(df,forward=TRUE)
-	#backward(train)
-	#ridge(train)
-	#lasso(train)
-
-
-# Sugestive analysis
-	tabs<-compute_tabs(9,model,train)
-
