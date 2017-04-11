@@ -34,9 +34,9 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 
 		if(boxcox)	
 		{
-		  bc<-boxcox(fit,data=df)
-		  lambda <- bc$x[which(bc$y==max(bc$y))]
-		  
+			bc<-boxcox(fit,data=df)
+			lambda <- bc$x[which(bc$y==max(bc$y))]
+			output[[1]]<-lambda
 		}
 
 	# Multicollinearity Analysis
@@ -50,6 +50,7 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 			# Leverage points
 			
 				lev.pnts<- which(infl$hat>2*(dim(df)[2])/dim(df)[1])
+				output[[2]] <- lev.pnts
 
 				# Plotting leverage points
 
@@ -75,6 +76,7 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 
 					sum.influencial.points <- sum(cooksd > 4/(dim(df)[1]-dim(df)[2]-1)) 
 					cookd.inf <- which(cooksd >4/(dim(df)[1]-dim(df)[2]-1))
+					output[[3]] <- cookd.inf
 				
 			# CovRatio
 
@@ -92,6 +94,7 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 				# Computing which are the influential points
 
 					sum.influencial.points.cov <- sum(covrat>1+(3*(dim(df)[2]-1)/dim(df)[1]))+sum(covrat<1-(3*(dim(df)[2]-1)/dim(df)[1]))
+					output[[4]] <- cbind(which(covrat>1+(3*(dim(df)[2]-1)/dim(df)[1])),which(covrat<1-(3*(dim(df)[2]-1)/dim(df)[1])))
 		}
 
 	
@@ -99,7 +102,11 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 
 	# Outlier Analysis
 
-		if(outliers)	{	outlierTest(fit, cutoff=0.05, n.max=100)	}
+		if(outliers)
+		{
+			out<-outlierTest(fit, cutoff=0.05, n.max=100)
+			output[[5]]<-as.numeric(names(which(abs(out$rstudent)>5)))
+		}
 }
 
 
