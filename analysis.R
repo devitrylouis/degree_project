@@ -108,6 +108,7 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 			out<-outlierTest(fit, cutoff=0.05, n.max=100)
 			output[[5]]<-as.numeric(names(which(abs(out$rstudent)>5)))
 		}
+	return(output)
 }
 
 
