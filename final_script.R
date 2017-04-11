@@ -9,6 +9,8 @@
 
 	source('~/Desktop/factoring.R')
 	source('~/Desktop/analysis.R')
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/analysis.R', echo=TRUE)
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/fitting.R')
 	
 # Importation of training and test set
 
@@ -18,3 +20,4 @@
 	# Linear Model
 
 	model<-fitting(train)
+	analysis(df,model,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,outliers=TRUE)
