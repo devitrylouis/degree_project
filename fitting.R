@@ -2,7 +2,7 @@ fitting <- function(train)
 {
 	# Fix some NAs
 
-   		train$GarageYrBlt[is.na(train$GarageYrBlt)] <- 0
+   	train$GarageYrBlt[is.na(train$GarageYrBlt)] <- 0
 		train$MasVnrArea[is.na(train$MasVnrArea)] <- 0
 		train$LotFrontage[is.na(train$LotFrontage)] <- 0
 
@@ -26,7 +26,7 @@ fitting <- function(train)
 		
 		# Removing duplicate/unwanted columns
 			
-			df <- train[-c(31,496,524,633,945,1299),]
+			df <- train
 			df <- subset(df, select = -seq )
 
 		# Removing outliers
@@ -38,7 +38,7 @@ fitting <- function(train)
 	# Fitting the model
 			
    		X<<-as.matrix(df[,-35])
-		fit <- lm(log(SalePrice)~X,qr=T,data=df)
+		fit <- lm(SalePrice~X,qr=T,data=df)
 			
 	# Returning the fit
 
