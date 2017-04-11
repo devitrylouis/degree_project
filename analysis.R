@@ -94,7 +94,7 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 				# Computing which are the influential points
 
 					sum.influencial.points.cov <- sum(covrat>1+(3*(dim(df)[2]-1)/dim(df)[1]))+sum(covrat<1-(3*(dim(df)[2]-1)/dim(df)[1]))
-					output[[4]] <- cbind(names(which(covrat>1+(3*(dim(df)[2]-1)/dim(df)[1]))),names(which(covrat<1-(3*(dim(df)[2]-1)/dim(df)[1]))))
+					output[[4]] <- c(names(which(covrat>1+(3*(dim(df)[2]-1)/dim(df)[1]))),names(which(covrat<1-(3*(dim(df)[2]-1)/dim(df)[1]))))
 					output[[4]] <- as.numeric(output[[4]])
 		}
 
