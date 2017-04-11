@@ -50,7 +50,7 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 			# Leverage points
 			
 				lev.pnts<- which(infl$hat>2*(dim(df)[2])/dim(df)[1])
-				output[[2]] <- lev.pnts
+				output[[2]] <- as.numeric(names(lev.pnts))
 
 				# Plotting leverage points
 
@@ -76,7 +76,7 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 
 					sum.influencial.points <- sum(cooksd > 4/(dim(df)[1]-dim(df)[2]-1)) 
 					cookd.inf <- which(cooksd >4/(dim(df)[1]-dim(df)[2]-1))
-					output[[3]] <- cookd.inf
+					output[[3]] <- as.numeric(names(cookd.inf))
 				
 			# CovRatio
 
