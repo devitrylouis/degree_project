@@ -38,6 +38,10 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 			lambda <- bc$x[which(bc$y==max(bc$y))]
 			output[[1]]<-lambda
 		}
+  if(!boxcox)
+  {
+    output[[1]]<-"No Box-Cox transformation"
+  }
 
 	# Multicollinearity Analysis
 
@@ -50,7 +54,7 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 			# Leverage points
 			
 				lev.pnts<- which(infl$hat>2*(dim(df)[2])/dim(df)[1])
-				output[[2]] <- as.numeric(names(lev.pnts))
+				output[[2]] <-as.numeric(names(lev.pnts))
 
 				# Plotting leverage points
 
@@ -76,7 +80,7 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 
 					sum.influencial.points <- sum(cooksd > 4/(dim(df)[1]-dim(df)[2]-1)) 
 					cookd.inf <- which(cooksd >4/(dim(df)[1]-dim(df)[2]-1))
-					output[[3]] <- as.numeric(names(cookd.inf))
+					output[[3]]<-as.numeric(names(cookd.inf))
 				
 			# CovRatio
 
@@ -94,9 +98,14 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 				# Computing which are the influential points
 
 					sum.influencial.points.cov <- sum(covrat>1+(3*(dim(df)[2]-1)/dim(df)[1]))+sum(covrat<1-(3*(dim(df)[2]-1)/dim(df)[1]))
-					output[[4]] <- c(names(which(covrat>1+(3*(dim(df)[2]-1)/dim(df)[1]))),names(which(covrat<1-(3*(dim(df)[2]-1)/dim(df)[1]))))
-					output[[4]] <- as.numeric(output[[4]])
+					output[[4]]<-as.numeric(c(names(which(covrat>1+(3*(dim(df)[2]-1)/dim(df)[1]))),names(which(covrat<1-(3*(dim(df)[2]-1)/dim(df)[1])))))
 		}
+    if(!multicollinearity)
+    {
+      ouput[[2]]<-"No informations regarding Leverage points"
+      output[[3]]<-"No informations regarding Influential points (Cook's distance)"
+      output[[4]]<-"No informations regarding Influential points (CovRatio)"
+    }
 
 	
 	# Regressor transformations
@@ -106,8 +115,15 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
 		if(outliers)
 		{
 			out<-outlierTest(fit, cutoff=0.05, n.max=100)
-			output[[5]]<-as.numeric(names(which(abs(out$rstudent)>5)))
+			index<-as.numeric(names(abs(out$rstudent>5)))
+			vector<-logical(length = dim(df)[1])
+			vector[index]<-TRUE
+			output[[5]]<-vector
 		}
+  if(!outliers)
+  {
+    output[[5]]<-"No informations regarding outliers"
+  }
 	return(output)
 }
 

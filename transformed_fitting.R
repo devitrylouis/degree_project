@@ -6,26 +6,28 @@ transformed <- function(model,output)
   		data<-df
 
   	# Removing outliers
-
-  		df<-df[ouput[[5]],]
-
+    #  vec<-sort((as.integer(output[[5]])),decreasing = TRUE)
+     # index <- which(as.numeric(rownames(df)) %in% vec)
+      data<-data[!output[[5]],]
+      
 	# Boxcox transformation
 
-		lambda<-ceiling(output[[1]])
+		lambda<-round(unlist(output[[1]]))
 
 		if(lambda==0)
 		{
-			data[["SalePrice"]]<-log(data[["SalePrice"]])
+			data[["SalePrice"]]<-log(as.numeric(data[["SalePrice"]]))
+			fit<-lm(log(SalePrice)~.,qr=T,data=data)
 		}
-  		if(lamda!=0)
+  		if(lambda!=0)
   		{
   			data[["SalePrice"]]<-(data[["SalePrice"]]^lambda -1)/lambda
+  			fit <- lm(SalePrice~.,qr=T,data=data)
   		}
-  	
+  	assign("data",data,envir=globalenv())
   	# Fitting
 
-	  	X <- as.matrix(df[,-35])
-	  	fit <- lm(SalePrice~X,qr=T,data=df)
+	  	fit <- lm(SalePrice~.,qr=T,data=data)
 
   	# Output transformed Linear Model
   	return(fit)

@@ -2,7 +2,7 @@ fitting <- function(train)
 {
 	# Fix some NAs
 
-   	train$GarageYrBlt[is.na(train$GarageYrBlt)] <- 0
+   		train$GarageYrBlt[is.na(train$GarageYrBlt)] <- 0
 		train$MasVnrArea[is.na(train$MasVnrArea)] <- 0
 		train$LotFrontage[is.na(train$LotFrontage)] <- 0
 
