@@ -18,4 +18,3 @@
 	# Linear Model
 
 	model<-fitting(train)
-	summary(model)
