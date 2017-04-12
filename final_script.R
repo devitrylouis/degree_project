@@ -23,6 +23,7 @@
 
 	model<-fitting(train)
 	output<-analysis(df,model,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,outliers=TRUE,high_terms=FALSE)
+
   
 	model_transformed <- transformed(model,output,df,1)
   output_transformed<-analysis(df1,model_transformed,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=FALSE,high_terms=TRUE)
@@ -32,5 +33,6 @@
   
   model_squared_transformed <- transformed(model_squared,output_squared,data_squared,2)
   output_squared_transformed <- analysis(df2,model_squared_transformed,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=FALSE,high_terms=FALSE)
+
   
   
