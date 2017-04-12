@@ -1,8 +1,9 @@
-transformed <- function(model,output)
+transformed <- function(model,output,df,id)
 {
   
 	# Copy of dataframe
-
+    if(id==1){name<-"df1"}
+    if(id==2){name<-"df2"}
   		data<-df
 
   	# Removing outliers
@@ -11,20 +12,21 @@ transformed <- function(model,output)
       data<-data[!output[[5]],]
       
 	# Boxcox transformation
-
+    if(typeof(output[[1]])!="character")
+    {  
 		lambda<-round(unlist(output[[1]]))
 
 		if(lambda==0)
 		{
 			data[["SalePrice"]]<-log(as.numeric(data[["SalePrice"]]))
-			fit<-lm(log(SalePrice)~.,qr=T,data=data)
 		}
   		if(lambda!=0)
   		{
   			data[["SalePrice"]]<-(data[["SalePrice"]]^lambda -1)/lambda
-  			fit <- lm(SalePrice~.,qr=T,data=data)
   		}
-  	assign("data",data,envir=globalenv())
+    }
+      assign(name,data,envir = globalenv())
+      
   	# Fitting
 
 	  	fit <- lm(SalePrice~.,qr=T,data=data)
