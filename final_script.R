@@ -46,8 +46,7 @@
   
       model_squared <- quadratic_transform(output_transformed,df1)
       output_squared <- analysis(data_squared,model_squared,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=TRUE,high_terms=FALSE)
->>>>>>> e9af34382dba10ee96c7239d72666c2f9ec35d6f
-  
+
     # Transformed Multiple Linear Model with higher terms
       
       model_squared_transformed <- transformed(model_squared,output_squared,data_squared,2)
