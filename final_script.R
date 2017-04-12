@@ -11,6 +11,7 @@
 	source('~/Desktop/analysis.R')
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/analysis.R', echo=TRUE)
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/fitting.R')
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/transformed_fitting.R')
 	
 # Importation of training and test set
 
@@ -20,4 +21,6 @@
 	# Linear Model
 
 	model<-fitting(train)
-	analysis(df,model,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,outliers=TRUE)
+	output<-analysis(df,model,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,outliers=TRUE)
+  model_transformed <- transformed(model,output)
+  output_transformed<-analysis(data,model_transformed,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=FALSE)
