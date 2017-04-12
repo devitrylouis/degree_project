@@ -13,7 +13,7 @@
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/fitting.R')
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/transformed_fitting.R')
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/quadratic.R')
-	
+	source('~/Desktop/quadratic_transform.R')
 # Importation of training and test set
 
 	train <- fread("/Users/louisdevitry/Documents/Education/KTH/Bachelor thesis/Data/train.csv" ,stringsAsFactors=FALSE)
@@ -22,6 +22,13 @@
 	# Linear Model
 
 	model<-fitting(train)
-	output<-analysis(df,model,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,outliers=TRUE,high_terms=TRUE)
-  model_transformed <- transformed(model,output)
-  output_transformed<-analysis(data,model_transformed,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=FALSE,high_terms=FALSE)
+	output<-analysis(df,model,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,outliers=TRUE,high_terms=FALSE)
+  model_transformed <- transformed(model,output,df,1)
+  
+  output_transformed<-analysis(df1,model_transformed,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=FALSE,high_terms=TRUE)
+  model_squared <- quadratic_transform(output_transformed,df1)
+  
+  output_squared <- analysis(data_squared,model_squared,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=TRUE,high_terms=FALSE)
+  model_squared_transformed <- transformed(model_squared,output_squared,data_squared,2)
+  
+  
