@@ -1,3 +1,6 @@
+lasso_model <- function()
+ {
+  
 # Lasso
 x=model.matrix(SalePrice~.,train)[,-1]
 y=train$SalePrice
@@ -17,3 +20,4 @@ bestlam=cv.out$lambda.min
 lasso.pred=predict(lasso.mod,s=bestlam ,newx=x[test_set,])
 
 mean((lasso.pred-y.test)^2)
+  }
