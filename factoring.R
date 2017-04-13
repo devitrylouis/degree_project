@@ -2,7 +2,7 @@ factoring <- function(train)
 {
 	#Creating new names for categorical predictors
 
-		new_names = c('paved','regshape','alley_pave','flat','gentle_slope','cul_de_sac_fr3'
+		new_names <<- c('paved','regshape','alley_pave','flat','gentle_slope','cul_de_sac_fr3'
 		,'nbhd_price_level','prox1','prox2','dwelling','house_style_price_level','roof_style'
 		,'roof_matl','ext1_price_level','ext2_price_level','masonry_type'
 		,'exterior_qual_level','exterior_cond_level','foundation_level'
@@ -63,5 +63,6 @@ factoring <- function(train)
 
 				train[[new_names[i]]]<-as.numeric(train[[new_names[i]]])
 		}
+		price_summary<<-price_summary
 		return(train)
 }
