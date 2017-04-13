@@ -62,4 +62,5 @@
   # Plot of the models assessment
     
     plot_comparison()
+    plot_comparison()
     
