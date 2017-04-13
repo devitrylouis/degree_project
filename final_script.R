@@ -16,6 +16,8 @@
 	source('~/Desktop/quadratic_transform.R')
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/remove_neighborhood.R')
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/plot_comparison.R')
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/ridge_regression.R')
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/lasso.R')
 	
 # Importation of training and test set
 
@@ -49,10 +51,15 @@
     model_squared_transformed <- transformed(model_squared,output_squared,data_squared,2)
     output<-analysis(df2,model_squared_transformed,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=FALSE,high_terms=FALSE)
     
+  # Lasso
+    
+    lasso <- lasso_model(df2)
+    
+  # Ridge Regression
+    
+    ridge <- ridge_regression_model(df2)
+    
   # Plot of the models assessment
     
     plot_comparison()
     
-  # Lasso
-    
-    lasso<-lasso_model(df2)
