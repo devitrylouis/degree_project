@@ -37,8 +37,9 @@ fitting <- function(train)
 
 	# Fitting the model
 			
-   		X<<-as.matrix(df[,-35])
-		fit <- lm(SalePrice~X,qr=T,data=df)
+   	#	X<<-as.matrix(df[,-35])
+   		
+		  fit <- lm(SalePrice~.,qr=T,data=df)
 			
 	# Returning the fit
 
