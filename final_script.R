@@ -4,7 +4,7 @@
 	install.lib <- load.libraries[!load.libraries %in% installed.packages()]
 	for(libs in install.lib) install.packages(libs, dependences = TRUE)
 	sapply(load.libraries, require, character = TRUE)
-
+	# include DAAG
 # Function sources
 
 	source('~/Desktop/factoring.R')
