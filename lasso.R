@@ -2,9 +2,9 @@ lasso_model <- function(df)
 {
   output<-list()
   # Predictors
-    x=model.matrix(SalePrice~.,df)[,-1]
+    x=model.matrix(log(SalePrice)~.,df)[,-1]
   # Response
-    y=df$SalePrice
+    y=log(df$SalePrice)
   # Gris of lambda
     grid=10^seq(10,-4,length=100)
   # Train and test set

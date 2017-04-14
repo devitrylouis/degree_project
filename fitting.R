@@ -29,11 +29,12 @@ fitting <- function(train)
 			df <- train
 			df <- subset(df, select = -seq )
 			mat <- scale(df[,-35])
-			sp <- as.vector(df[,35])
+			sp <- df[,35]
+			sp <- as.matrix(sp)
+			sp <- as.vector(sp)
 			df <- data.table(mat)
-			dataset <- data.frame(a = 1:5, b = 2:6, c=3:7)
-			add_column(df, sp, .after = 34)
-
+			df<-add_column(df, sp, .after = 34)
+      colnames(df)[35]<-"SalePrice"
 		# Removing outliers
 			
 			# assign("train",train[-c(31,496,524,633,945,1299),],envir=globalenv())
