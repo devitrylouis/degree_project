@@ -28,6 +28,11 @@ fitting <- function(train)
 			
 			df <- train
 			df <- subset(df, select = -seq )
+			mat <- scale(df[,-35])
+			sp <- as.vector(df[,35])
+			df <- data.table(mat)
+			dataset <- data.frame(a = 1:5, b = 2:6, c=3:7)
+			add_column(df, sp, .after = 34)
 
 		# Removing outliers
 			
