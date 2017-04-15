@@ -11,23 +11,26 @@ j<-0
 while(length(predictors)>0)
   {
 j<-j+1
-    p_value<-numeric(length(predictors))
-    significance <- logical(length(predictors))
+    p_value <- matrix(NA,nrow=2,ncol=length(predictors))
+    significance <- matrix(NA,nrow=2,ncol=length(predictors))
     for (i in 1:length(predictors)) 
     {
-      fit1 <- lm(df$SalePrice ~.,data=df)
-      fit2 <- lm(df$SalePrice ~. +poly(df[[ predictors[i] ]],2,raw=TRUE) ,data=df)
-      anov<-anova(fit1,fit2)
-      p_value[i]<-anov$`Pr(>F)`[2]
-      if(p_value[i]<=0.01)
+      for(k in 2:3)
       {
-        significance[i]<-TRUE
+        fit1 <- lm(df$SalePrice ~.,data=df)
+        fit2 <- lm(df$SalePrice ~. +I(df[[ predictors[i] ]]^k) ,data=df)
+        anov<-anova(fit1,fit2)
+        p_value[k,i]<-anov$`Pr(>F)`[2]
+        if(p_value[k,i]<=0.01)
+        {
+          significance[k,i]<-TRUE
+        }
       }
     }
     
     # Predictor higher term with the lowest p-value
     
-    names[j] <- predictors[which.min(p_value)]
+    names[j] <- predictors[which.min(p_value)[2]]
     
     # Predictors of interest are kept
     
