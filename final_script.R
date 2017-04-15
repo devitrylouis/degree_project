@@ -9,16 +9,16 @@
 
 	source('~/Desktop/factoring.R')
 	source('~/Desktop/analysis.R')
-	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/analysis.R', echo=TRUE)
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/Descriptive and Comparative Analysis/analysis.R')
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/fitting.R')
-	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/transformed_fitting.R')
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/Transformations/transformed_fitting.R')	
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/quadratic.R')
 	source('~/Desktop/quadratic_transform.R')
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/remove_neighborhood.R')
-	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/plot_comparison.R')
-	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/ridge_regression.R')
-	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/lasso.R')
-	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/quadratic_predictors.R')
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/Descriptive and Comparative Analysis/plot_comparison.R')
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/Shrinkage Methods/ridge_regression.R')
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/Shrinkage Methods/lasso.R')
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/Higher Terms/quadratic_predictors.R')
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/cubic.R')
 # Importation of training and test set
 
@@ -51,8 +51,7 @@
     
     model_squared_transformed <- transformed(model_squared,output_squared,df2,3)
     output<-analysis(df3,model_squared_transformed,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=FALSE)
-    df3<-cubic_predictors(df3)
-    
+
   # Lasso
     
     lasso <- lasso_model(df3)
