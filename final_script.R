@@ -18,8 +18,7 @@
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/Descriptive and Comparative Analysis/plot_comparison.R')
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/Shrinkage Methods/ridge_regression.R')
 	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/Shrinkage Methods/lasso.R')
-	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/Higher Terms/quadratic_predictors.R')
-	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/cubic.R')
+	source('~/Documents/Education/KTH/Bachelor thesis/Bachelor Thesis/Higher Terms/higher_terms.R')
 # Importation of training and test set
 
 	train <- fread("/Users/louisdevitry/Documents/Education/KTH/Bachelor thesis/Data/train.csv" ,stringsAsFactors=FALSE)
@@ -43,14 +42,14 @@
     output_transformed<-analysis(df1,model_transformed,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=TRUE)
     
   # Multiple Linear Model with higher terms of interest
-    df2<-quadratic_predictors(df1)
-    model_squared <- transformed(model_transformed,output_transformed,df2,2)
-    output_squared <- analysis(df2,model_squared,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=TRUE)
+    df2<-higher_terms(df1,4)
+    model_squared <- transformed(model_transformed,output_transformed,df2,3)
+    output_squared <- analysis(df3,model_squared,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=TRUE)
 
   # Transformed Multiple Linear Model with higher terms
     
-    model_squared_transformed <- transformed(model_squared,output_squared,df2,3)
-    output<-analysis(df3,model_squared_transformed,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=FALSE)
+    model_squared_transformed <- transformed(model_squared,output_squared,df3,4)
+    output<-analysis(df4,model_squared_transformed,residuals=TRUE,boxcox=FALSE,multicollinearity=TRUE,outliers=FALSE)
 
   # Lasso
     

@@ -1,4 +1,4 @@
-quadratic_predictors <- function(df)
+higher_terms <- function(df,k_max)
 {
   names <- character()
 
@@ -11,11 +11,11 @@ j<-0
 while(length(predictors)>0)
   {
 j<-j+1
-    p_value <- matrix(NA,nrow=2,ncol=length(predictors))
-    significance <- matrix(FALSE,nrow=2,ncol=length(predictors))
+    p_value <- matrix(NA,nrow=k_max-1,ncol=length(predictors))
+    significance <- matrix(FALSE,nrow=k_max-1,ncol=length(predictors))
     for (i in 1:length(predictors)) 
     {
-      for(k in 2:3)
+      for(k in 2:k_max)
       {
         fit1 <- lm(df$SalePrice ~.,data=df)
         fit2 <- lm(df$SalePrice ~. +I(df[[ predictors[i] ]]^k) ,data=df)
@@ -33,7 +33,7 @@ j<-j+1
     names[j] <- predictors[inds[2]]
     
     # Predictors of interest are kept
-    test_significance <- logical(2)
+    test_significance <- logical(k_max-1)
     
     indices<-inds
     
@@ -49,7 +49,7 @@ j<-j+1
     
     # Add the most significant to the data frame
     degree<-as.character(inds[1]+1)
-    df[[paste(names[j],degree)]] <- df[[names[j]]]^inds[1] ### Concatenate name
+    df[[paste(names[j],degree)]] <- df[[names[j]]]^(inds[1]+1) ### Concatenate name
   }
   
 
