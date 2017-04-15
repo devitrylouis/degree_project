@@ -5,6 +5,8 @@ transformed <- function(model,output,df,id)
     if(id==1){name<-"df1"}
     if(id==2){name<-"df2"}
     if(id==3){name<-"df3"}
+    if(id==4){name<-"df4"}
+  
   
     		data<-df
 
