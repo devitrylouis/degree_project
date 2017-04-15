@@ -4,12 +4,16 @@ transformed <- function(model,output,df,id)
 	# Copy of dataframe
     if(id==1){name<-"df1"}
     if(id==2){name<-"df2"}
-  		data<-df
+    if(id==3){name<-"df3"}
+  
+    		data<-df
 
   	# Removing outliers
-    #  vec<-sort((as.integer(output[[5]])),decreasing = TRUE)
-     # index <- which(as.numeric(rownames(df)) %in% vec)
-      data<-data[!output[[5]],]
+
+    	if(!is.character(output[[5]]))
+    	{
+        data<-data[!output[[5]],]
+    	}
       
 	# Boxcox transformation
     if(typeof(output[[1]])!="character")
