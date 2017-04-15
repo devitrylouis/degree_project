@@ -1,4 +1,4 @@
-analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,outliers=TRUE,high_terms=TRUE)
+analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,outliers=TRUE)
 {	
 	# Ressidual Analysis
 
@@ -125,15 +125,6 @@ analysis <- function(df,fit,residuals=TRUE,boxcox=TRUE,multicollinearity=TRUE,ou
     output[[5]]<-"No informations regarding outliers"
   }
   
-  if(high_terms)
-  {
-    quad<-quadratic(df)
-    output[[6]]<-quad
-  }
-  if(!high_terms)
-  {
-    output[[6]]<-"No informations regarding higherterms"
-  }
   
 	return(output)
 }

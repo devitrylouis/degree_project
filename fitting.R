@@ -2,9 +2,9 @@ fitting <- function(train)
 {
 	# Fix some NAs
 
-   	train$GarageYrBlt[is.na(train$GarageYrBlt)] <- 0
-		train$MasVnrArea[is.na(train$MasVnrArea)] <- 0
-		train$LotFrontage[is.na(train$LotFrontage)] <- 0
+   	train$GarageYrBlt[is.na(train$GarageYrBlt)] <- mean(train$GarageYrBlt[!is.na(train$GarageYrBlt)])
+		train$MasVnrArea[is.na(train$MasVnrArea)] <- mean(train$MasVnrArea[!is.na(train$MasVnrArea)])
+		train$LotFrontage[is.na(train$LotFrontage)] <- mean(train$LotFrontage[!is.na(train$LotFrontage)])
 
 	# Factoring categorical predictors
 		
@@ -17,6 +17,7 @@ fitting <- function(train)
 		train$TotalBsmtSF <- NULL
 		train$Utilities<-NULL
 		train$MiscFeature <- NULL
+		train$MiscVal <- NULL
 
 		assign("seq",which(colnames(train) %in% old_names))
 
@@ -30,8 +31,6 @@ fitting <- function(train)
 			df <- subset(df, select = -seq )
 
 		# Removing outliers
-			
-			# assign("train",train[-c(31,496,524,633,945,1299),],envir=globalenv())
 			
 			assign("df",df,envir=globalenv())
 
